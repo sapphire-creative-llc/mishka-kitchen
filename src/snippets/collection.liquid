@@ -1,0 +1,31 @@
+<a href="{{ product.url }}" class="no-underline black w25p hover-image-wrapper px3 pb3 border-box" data-type="{{ product.type }}">
+  <div class="relative">
+    {% for image in product.images %}
+      {% if forloop.first == true %}
+        <div class="overflow-hidden bg-light-gray relative z1 hover-hide">
+          <div class="image bg-center bg-cover fade-image" style="padding-top: 100%;" data-img="{{ image | img_url: '500x' }}"></div>
+        </div>
+      {% endif %}
+      {% if forloop.index == 2 %}
+        <div class="absolute t0 l0 overflow-hidden bg-light-gray w100p">
+          <div class="image bg-center bg-cover fade-image" style="padding-top: 100%;" data-img="{{ image | img_url: '500x' }}"></div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="text-center">
+    <p class="mt1 mb0 h5 dark-gray">{{ product.title }}</p>
+    {% if product.first_available_variant.available %}
+      <p class="tag inline-block h6 dark-teal bg-light-teal">
+        {{ product.price | money_without_trailing_zeros }}
+      </p>
+      {% if product.compare_at_price_max > 0 %}
+        <strike class="strike dark-teal h6">
+          <span class="mild-gray">{{ product.compare_at_price_max | money_without_trailing_zeros }}</span>
+        </strike>
+      {% endif %}
+    {% else %}
+      <p class="h6 medium-gray inline-block">Sold Out</p>
+    {% endif %}
+  </div>
+</a>

@@ -1,0 +1,159 @@
+{% if section.settings.announcement_bar_enabled %}
+  {% if section.settings.announcement_bar_link != blank %}
+    <a class="black no-underline" href="{{ settings.announcement_banner_link }}">
+      <div class="js-announcement announcement height-2 text-center">
+        <div class="pad-announcement flex items-center justify-center h100p bg-dark-teal white">
+          <p class="m0 h5 flex-1">{{ section.settings.announcement_bar_text }}</p>
+        </div>
+      </div>
+    </a>
+  {% else %}
+    <div class="js-announcement announcement height-2 text-center">
+      <div class="pad-announcement flex items-center justify-center h100p bg-dark-teal white">
+        <p class="m0 h5 flex-1">{{ section.settings.announcement_bar_text }}</p>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+<header class="js-header site-nav sticky t0 mx1 l1 r1 show-lg z9 h5 text-uppercase bg-smoke rounded-bottom">
+  <div class="flex items-center h100p px1">
+    <nav class="flex items-center w100p">
+      <div class="flex-1 basis-0">
+        {% for link_1 in linklists[section.settings.header_linklist_1].links %}
+          <a class="dark-teal no-underline p1 hover-opacity-5" href="{{ link_1.url }}">
+            {{ link_1.title }}
+          </a>
+        {% endfor %}
+      </div>
+      <h1 class="m0 h0">
+        <a class="no-underline" href="/">
+          <img width="{{ section.settings.logo_width_desktop }}" src="{{ section.settings.logo | img_url: '400x' }}" />
+        </a>
+      </h1>
+      <div class="flex items-center justify-end flex-1 basis-0 text-right">
+        {% if shop.customer_accounts_enabled %}
+          {% for link_2 in linklists[section.settings.header_linklist_2].links %}
+            <a class="dark-teal no-underline p1 hover-opacity-5" href="{{ link_2.url }}">
+              {{ link_2.title }}
+            </a>
+          {% endfor %}
+        {% endif %}
+        <a class="js-cart-trigger no-underline dark-teal p1 hover-opacity-5" href="#">
+          <div class="flex items-center">
+            {% assign cart_icon_width = 22 %}
+            {% include 'cart-icon' %}
+            {% include 'cart-count' %}
+          </div>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+{% unless template.name == 'index' %}
+  {% include 'secondary-menu' %}
+{% endunless %}
+
+<header class="js-header z9 t0 bg-smoke hide-lg site-nav sticky h5 text-uppercase">
+  <div class="flex items-center h100p px1">
+    <div class="flex-1 w20p h0">
+      <svg class="js-mobile-nav-open inline-block pointer dark-teal" xmlns="http://www.w3.org/2000/svg" width="21" viewBox="0 0 33 23">
+        <g fill="currentColor">
+          <rect y="10.2" width="33" height="2.6"/>
+          <rect width="33" height="2.6"/>
+          <rect y="20.4" width="33" height="2.6"/>
+        </g>
+      </svg>
+    </div>
+    <div class="flex-1 w60p text-center">
+      <h1 class="m0 h0">
+        <a class="no-underline" href="/">
+          <img width="{{ section.settings.logo_width_mobile }}" src="{{ section.settings.logo | img_url: '300x' }}" />
+        </a>
+      </h1>
+    </div>
+    <div class="flex-1 w20p flex justify-end">
+      <a class="js-cart-trigger no-underline dark-teal" href="#">
+        <div class="flex items-center">
+          {% assign cart_icon_width = 18 %}
+          {% include 'cart-icon' %}
+          {% include 'cart-count' %}
+        </div>
+      </a>
+    </div>
+  </div>
+</header>
+{% unless template.name == 'index' %}
+  {% include 'secondary-menu-m' %}
+{% endunless %}
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enabled",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_bar_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "id": "logo",
+        "type": "image_picker",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width_desktop",
+        "min": 50,
+        "max": 240,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (desktop)",
+        "default": 160
+      },
+      {
+        "type": "range",
+        "id": "logo_width_mobile",
+        "min": 50,
+        "max": 240,
+        "step": 5,
+        "unit": "px",
+        "label": "Logo width (mobile)",
+        "default": 120
+      },
+      {
+        "type": "link_list",
+        "id": "header_linklist_1",
+        "label": "First menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "header_linklist_2",
+        "label": "Second menu",
+        "default": "main-menu"
+      }
+    ]
+  }
+{% endschema %}

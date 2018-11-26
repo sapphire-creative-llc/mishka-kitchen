@@ -1,0 +1,24 @@
+<div class="bg-light-teal dark-pink py2">
+  <div class="tagline mx-auto text-center">
+    <h2 class="text-normal red mt0 mb1">{{ section.settings.title }}</h2>
+    <p class="h2 m0 dark-teal">{{ section.settings.description }}</p>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Subheader",
+    "settings": [
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Text"
+      },
+      {
+        "id": "description",
+        "type": "text",
+        "label": "Description"
+      }
+    ]
+  }
+{% endschema %}

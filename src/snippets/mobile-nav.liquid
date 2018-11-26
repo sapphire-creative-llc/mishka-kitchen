@@ -1,0 +1,24 @@
+<div class="mobile-nav z10 fixed t0 l0 b0 scroll-y w100p">
+  <div class="w70p bg-light-teal left h100p">
+    <div class="js-mobile-nav-close text-left pt1 px1 pointer">
+      <svg class="inline-block v-middle" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+        <polygon points="7.5 8.5 1 14.9 0 13.9 6.5 7.5 0 1 1 0 7.5 6.5 14 0 15 1 8.5 7.5 15 14 14 15" fill="#6D6D6D"/>
+      </svg>
+    </div>
+    <nav class="py1 w60p mx-auto">
+      {% for left_link in linklists.header-left.links %}
+        <a class="dark-teal no-underline h2 block mb1" href="{{ left_link.url }}">
+          {{ left_link.title }}
+        </a>
+      {% endfor %}
+      {% if shop.customer_accounts_enabled %}
+        {% for right_link in linklists.header-right.links %}
+          <a class="dark-teal no-underline h2 block mb1" href="{{ right_link.url }}">
+            {{ right_link.title }}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </nav>
+  </div>
+  <div class="js-mobile-nav-close w30p h100p left"></div>
+</div>

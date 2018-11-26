@@ -1,0 +1,44 @@
+<div class="bg-red rounded py4 text-center">
+  <div class="grid">
+    <div class="quote-width mx-auto">
+      <p class="apercu-light white mt0 mb2">“{{ section.settings.text }}”</p>
+      <div class="flex justify-center">
+        <div class="flex items-center">
+          <img class="circle retina" src="{{ section.settings.author_image | img_url: '150x' }}" />
+          <div class="light-teal ml1 text-left">
+            <h2 class="text-normal apercu-light m0">{{ section.settings.author_name }}</h2>
+            <span class="text-uppercase h5">{{ section.settings.author_title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Quote",
+    "settings": [
+      {
+        "id": "text",
+        "type": "text",
+        "label": "Text"
+      },
+      {
+        "id": "author_name",
+        "type": "text",
+        "label": "Author name"
+      },
+      {
+        "id": "author_image",
+        "type": "image_picker",
+        "label": "Author image"
+      },
+      {
+        "id": "author_title",
+        "type": "text",
+        "label": "Author title"
+      }
+    ]
+  }
+{% endschema %}

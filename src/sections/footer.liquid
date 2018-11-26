@@ -1,0 +1,122 @@
+<footer class="site-footer hide show-md px1">
+  <div class="pt2 bg-light-teal black rounded-top px2">
+    <div class="flex">
+      <div class="overflow-hidden w90p left mb1">
+        <nav class="w30p left py1">
+          <p class="m0 pb1">{{ section.settings.footer_heading_1 }}</p>
+          {% for link_1 in linklists[section.settings.footer_linklist_1].links %}
+            <a class="h5 inline-block no-underline dark-teal hover-opacity-5" href="{{ link_1.url }}">
+              {{ link_1.title }}
+            </a><br />
+          {% endfor %}
+        </nav>
+        <nav class="w30p left py1">
+          <p class="m0 pb1">{{ section.settings.footer_heading_2 }}</p>
+          {% for link_2 in linklists[section.settings.footer_linklist_2].links %}
+            <a class="h5 inline-block no-underline dark-teal hover-opacity-5" href="{{ link_2.url }}">
+              {{ link_2.title }}
+            </a><br />
+          {% endfor %}
+        </nav>
+        <nav class="w30p left py1">
+          <p class="m0 pb1">{{ section.settings.footer_heading_3 }}</p>
+          {% for link_3 in linklists[section.settings.footer_linklist_3].links %}
+            <a class="h5 inline-block no-underline dark-teal hover-opacity-5" href="{{ link_3.url }}">
+              {{ link_3.title }}
+            </a><br />
+          {% endfor %}
+        </nav>
+      </div>
+      <div class="overflow-hidden w50p left pt1">
+        <div class="mb1">
+          {% include 'social-icons' %}
+        </div>
+        <label class="block medium-gray h5" for="mce-EMAIL" style="margin-bottom: .5rem;">
+          Be an insider! Sign up for the {{ shop.name }} newsletter:
+        </label>
+        {% include 'footer-signup' %}
+      </div>
+    </div>
+    <p class="medium-gray h6 pb2 mb0">
+      {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. All rights reserved.
+    </p>
+  </div>
+</footer>
+<footer class="site-footer hide-md bg-light-teal black px1">
+  <nav class="py1">
+    <p class="m0 pb1">{{ section.settings.footer_heading_1 }}</p>
+    {% for link_1 in linklists[section.settings.footer_linklist_1].links %}
+      <a class="h5 inline-block no-underline dark-teal hover-opacity-5" href="{{ link_1.url }}">
+        {{ link_1.title }}
+      </a><br />
+    {% endfor %}
+    <span class="pb1 block"></span>
+    <p class="m0 pb1">{{ section.settings.footer_heading_2 }}</p>
+    {% for link_2 in linklists[section.settings.footer_linklist_2].links %}
+      <a class="h5 inline-block no-underline dark-teal hover-opacity-5" href="{{ link_2.url }}">
+        {{ link_2.title }}
+      </a><br />
+    {% endfor %}
+    <span class="pb1 block"></span>
+    <p class="m0 pb1">{{ section.settings.footer_heading_3 }}</p>
+    {% for link_3 in linklists[section.settings.footer_linklist_3].links %}
+      <a class="h5 inline-block no-underline dark-teal hover-opacity-5" href="{{ link_3.url }}">
+        {{ link_3.title }}
+      </a><br />
+    {% endfor %}
+  </nav>
+  <div class="overflow-hidden pt1 pb2">
+    <div class="mb1">
+      {% include 'social-icons' %}
+    </div>
+    <label class="block medium-gray h5" for="mce-EMAIL" style="margin-bottom: .5rem;">
+      Be an insider! Sign up for the {{ shop.name }} newsletter:
+    </label>
+    {% include 'footer-signup' %}
+  </div>
+  <p class="medium-gray h6 pb2 mb0">
+    {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. All rights reserved.
+  </p>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_heading_1",
+        "label": "First menu heading"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_1",
+        "label": "First menu",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_heading_2",
+        "label": "Second menu heading"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_2",
+        "label": "Second menu",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_heading_3",
+        "label": "Third menu heading"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_3",
+        "label": "Third menu",
+        "default": "footer"
+      }
+    ]
+  }
+
+{% endschema %}
