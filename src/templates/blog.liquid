@@ -4,7 +4,9 @@
     <div class="w80p mx-auto">
       {% if current_tags %}
         {% capture blog_title %}
-          {{ blog.title }} &mdash; {{ current_tags.first }}
+          <div class="blog-heading">
+            {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
+          </div>
         {% endcapture %}
       {% endif %}
 
@@ -45,12 +47,16 @@
                 <p class="medium-gray h5 m0">
                   {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
                 </p>
-                <p class="dark-gray">
-                  {{ article.content | strip_html | truncatewords: 30 }}
-                  <a href="{{ article.url }}" class="dark-teal no-underline">
-                    {{ 'blogs.article.read_more' | t }}
-                  </a>
-                </p>
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  <p class="dark-gray">
+                    {{ article.content | strip_html | truncatewords: 30 }}
+                    <a href="{{ article.url }}" class="dark-teal no-underline">
+                      {{ 'blogs.article.read_more' | t }}
+                    </a>
+                  </p>
+                {% endif %}
               </div>
             </div>
           {% endfor %}
