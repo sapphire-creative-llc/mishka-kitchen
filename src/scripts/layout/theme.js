@@ -106,23 +106,23 @@ import "../../styles/fonts.scss.liquid";
           <div class="flex-1 px1">
             <p class="m0 h4">${product_title}</p>
             <p class="m0 h5">${variantTitle} ${product_type} - ${formattedPrice}</p>
-            <div class="number-input inline-block rounded border border-charcoal">
+            <div class="number-input inline-block rounded border cart-border-color">
               <button class="decrement-cart-quantity" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 9 6" fill="#979797">
+                <svg class="cart-color" xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 9 6" fill="currentColor">
                   <path d="M4.6 3.8L7.8 0.6 8.6 1.5 5.5 4.7 5.5 4.7 4.6 5.6 0.5 1.4 1.4 0.5 4.6 3.8Z"/>
                 </svg>
               </button>
               <input class="text-center" style="color: currentColor" min="1" name="quantity" value="${quantity}" type="number">
               <button class="increment-cart-quantity plus" type="button">
-                <svg style="transform: rotate(180deg);" xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 9 6" fill="#979797">
+                <svg class="cart-color" style="transform: rotate(180deg);" xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 9 6" fill="currentColor">
                   <path d="M4.6 3.8L7.8 0.6 8.6 1.5 5.5 4.7 5.5 4.7 4.6 5.6 0.5 1.4 1.4 0.5 4.6 3.8Z"/>
                 </svg>
               </button>
             </div>
           </div>
           <div>
-            <a class="h5 no-underline rounded border border-charcoal block remove-from-cart hover-opacity-5" href="#">
-              <svg class="pointer medium-gray block" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 15 15">
+            <a class="h5 no-underline rounded block remove-from-cart hover-opacity-5" href="#">
+              <svg class="pointer cart-color block" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 15 15">
                 <polygon points="7.5 8.5 1 14.9 0 13.9 6.5 7.5 0 1 1 0 7.5 6.5 14 0 15 1 8.5 7.5 15 14 14 15" fill="currentColor"/>
               </svg>
             </a>
