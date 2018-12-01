@@ -1,27 +1,34 @@
+{% style %}
+  .announcement-color { color: {{ section.settings.announcement_text_color }} }
+  .announcement-bg-color { background-color: {{ section.settings.announcement_bg_color }} }
+  .header-link-color { color: {{ section.settings.header_text_color }} }
+  .header-bg-color { background-color: {{ section.settings.header_bg_color }} }
+{% endstyle %}
+
 {% if section.settings.announcement_bar_enabled %}
   {% if section.settings.announcement_bar_link != blank %}
-    <a class="black no-underline" href="{{ settings.announcement_banner_link }}">
+    <a class="announcement-wrapper black no-underline" href="{{ settings.announcement_banner_link }}">
       <div class="js-announcement announcement height-2 text-center">
-        <div class="pad-announcement flex items-center justify-center h100p bg-dark-teal white">
+        <div class="pad-announcement flex items-center justify-center h100p announcement-bg-color announcement-color">
           <p class="m0 h5 flex-1">{{ section.settings.announcement_bar_text }}</p>
         </div>
       </div>
     </a>
   {% else %}
-    <div class="js-announcement announcement height-2 text-center">
-      <div class="pad-announcement flex items-center justify-center h100p bg-dark-teal white">
+    <div class="announcement-wrapper js-announcement announcement height-2 text-center">
+      <div class="pad-announcement flex items-center justify-center h100p announcement-bg-color announcement-color">
         <p class="m0 h5 flex-1">{{ section.settings.announcement_bar_text }}</p>
       </div>
     </div>
   {% endif %}
 {% endif %}
 
-<header class="js-header site-nav sticky t0 mx1 l1 r1 show-lg z9 h5 text-uppercase bg-smoke rounded-bottom">
+<header class="js-header site-nav sticky t0 mx1 l1 r1 show-lg z9 h5 text-uppercase header-bg-color rounded-bottom">
   <div class="flex items-center h100p px1">
     <nav class="flex items-center w100p">
       <div class="flex-1 basis-0">
         {% for link_1 in linklists[section.settings.header_linklist_1].links %}
-          <a class="dark-teal no-underline p1 hover-opacity-5" href="{{ link_1.url }}">
+          <a class="header-link-color no-underline p1 hover-opacity-5" href="{{ link_1.url }}">
             {{ link_1.title }}
           </a>
         {% endfor %}
@@ -34,12 +41,12 @@
       <div class="flex items-center justify-end flex-1 basis-0 text-right">
         {% if shop.customer_accounts_enabled %}
           {% for link_2 in linklists[section.settings.header_linklist_2].links %}
-            <a class="dark-teal no-underline p1 hover-opacity-5" href="{{ link_2.url }}">
+            <a class="header-link-color no-underline p1 hover-opacity-5" href="{{ link_2.url }}">
               {{ link_2.title }}
             </a>
           {% endfor %}
         {% endif %}
-        <a class="js-cart-trigger no-underline dark-teal p1 hover-opacity-5" href="#">
+        <a class="js-cart-trigger no-underline header-link-color p1 hover-opacity-5" href="#">
           <div class="flex items-center">
             {% assign cart_icon_width = 22 %}
             {% include 'cart-icon' %}
@@ -54,7 +61,7 @@
   {% include 'secondary-menu' %}
 {% endunless %}
 
-<header class="js-header z9 t0 bg-smoke hide-lg site-nav sticky h5 text-uppercase">
+<header class="js-header z9 t0 header-bg-color hide-lg site-nav sticky h5 text-uppercase">
   <div class="flex items-center h100p px1">
     <div class="flex-1 w20p h0">
       <svg class="js-mobile-nav-open inline-block pointer dark-teal" xmlns="http://www.w3.org/2000/svg" width="21" viewBox="0 0 33 23">
@@ -114,8 +121,32 @@
         "info": "Optional"
       },
       {
+        "id": "announcement_text_color",
+        "type": "color",
+        "label": "Text color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "announcement_bg_color",
+        "type": "color",
+        "label": "Background color",
+        "default": "#5DA594"
+      },
+      {
         "type": "header",
         "content": "Header"
+      },
+      {
+        "id": "header_text_color",
+        "type": "color",
+        "label": "Text/link color",
+        "default": "#5DA594"
+      },
+      {
+        "id": "header_bg_color",
+        "type": "color",
+        "label": "Background color",
+        "default": "#eee"
       },
       {
         "id": "logo",

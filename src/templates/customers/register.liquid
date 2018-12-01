@@ -1,51 +1,24 @@
-<h1>{{ 'customer.register.title' | t }}</h1>
-
 {% form 'create_customer' %}
-  {{ form.errors | default_errors }}
 
-  <label for="FirstName" class="label-hidden">
-    {{ 'customer.register.first_name' | t }}
-  </label>
-  <input type="text"
-    name="customer[first_name]"
-    id="FirstName"
-    placeholder="{{ 'customer.register.first_name' | t }}"
-    autofocus
-    {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+{{ form.errors | default_errors }}
 
-  <label for="LastName" class="label-hidden">
-    {{ 'customer.register.last_name' | t }}
-  </label>
-  <input type="text"
-    name="customer[last_name]"
-    id="LastName"
-    placeholder="{{ 'customer.register.last_name' | t }}"
-    {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+<div class="grid page pt2 pb3">
+  <div class="page-content">
+    <div class="text-center">
+      <h5>Sign Up</h5>
+    </div>
+    <div>
+      <label class="h5 text-uppercase" for="first_name">First Name</label>
+      <input class="border border-smoke focus-border-black w100p p0_5 h4 mb1 border-box" type="text" value="" name="customer[first_name]" size="30" />
+      <label class="h5 text-uppercase" for="last_name">Last Name</label>
+      <input class="border border-smoke focus-border-black w100p p0_5 h4 mb1 border-box" type="text" value="" name="customer[last_name]" size="30" />
+      <label class="h5 text-uppercase" for="email">Email Address</label>
+      <input class="border border-smoke focus-border-black w100p p0_5 h4 mb1 border-box" type="email" value="" name="customer[email]" size="30" />
+      <label class="h5 text-uppercase" for="password">Password</label>
+      <input class="border border-smoke focus-border-black w100p p0_5 h4 mb1 border-box" type="password" value="" name="customer[password]" />
+      <input class="button h5 block mx-auto text-uppercase bg-black rounded white no-border mt1" type="submit" value="Create Account" />
+    </div>
+  </div>
+</div>
 
-  <label for="Email" class="label-hidden">
-    {{ 'customer.register.email' | t }}
-  </label>
-  <input type="email"
-    name="customer[email]"
-    id="Email"
-    class="{% if form.errors contains 'email' %}input-error{% endif %}"
-    placeholder="{{ 'customer.register.email' | t }}"
-    value="{% if form.email %}{{ form.email }}{% endif %}"
-    spellcheck="false"
-    autocomplete="off"
-    autocapitalize="off">
-
-  <label for="CreatePassword" class="label-hidden">
-    {{ 'customer.register.password' | t }}
-  </label>
-  <input type="password"
-    name="customer[password]"
-    id="CreatePassword"
-    class="{% if form.errors contains 'password' %}input-error{% endif %}"
-    placeholder="{{ 'customer.register.password' | t }}">
-
-  <p>
-    <input type="submit" value="{{ 'customer.register.submit' | t }}" class="button">
-  </p>
-  <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
 {% endform %}

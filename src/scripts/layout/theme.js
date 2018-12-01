@@ -112,7 +112,7 @@ import "../../styles/fonts.scss.liquid";
                   <path d="M4.6 3.8L7.8 0.6 8.6 1.5 5.5 4.7 5.5 4.7 4.6 5.6 0.5 1.4 1.4 0.5 4.6 3.8Z"/>
                 </svg>
               </button>
-              <input class="text-center white" min="1" name="quantity" value="${quantity}" type="number">
+              <input class="text-center" style="color: currentColor" min="1" name="quantity" value="${quantity}" type="number">
               <button class="increment-cart-quantity plus" type="button">
                 <svg style="transform: rotate(180deg);" xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 9 6" fill="#979797">
                   <path d="M4.6 3.8L7.8 0.6 8.6 1.5 5.5 4.7 5.5 4.7 4.6 5.6 0.5 1.4 1.4 0.5 4.6 3.8Z"/>
@@ -495,6 +495,9 @@ import "../../styles/fonts.scss.liquid";
       }
     });
   };
+
+  const announcement = $(".announcement-wrapper").detach();
+  $(".site").prepend(announcement);
 
   $(".secondary-trigger").on("click", () => {
     $(".secondary-nav").toggleClass("hide");
