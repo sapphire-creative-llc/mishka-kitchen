@@ -1,3 +1,5 @@
-<a href="{{ block.settings.link_url }}">
-  <img src="{{ block.settings.image | img_url: '450x' }}" alt="">
-</a>
+<div class="w25p px1 border-box mb2">
+  <a href="{{ block.settings.link_url }}">
+    <div class="rounded image bg-center bg-cover fade-image border border-smoke" style="padding-top: 100%;" data-img="{{ block.settings.image | img_url: '450x' }}"></div>
+  </a>
+</div>

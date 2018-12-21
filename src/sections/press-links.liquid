@@ -1,15 +1,12 @@
-<div class="grid pt3 pb8">
-  <div>
-    <h5>{{ page.title }}</h5>
-  </div>
-  {% for block in section.blocks %}
-
+<div class="py3">
+  <div class="flex flex-wrap">
+    {% for block in section.blocks %}
       {% case block.type %}
         {% when 'press-links' %}
         {% include 'press-link' %}
       {% endcase %}
-    
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
 
 {% schema %}
@@ -17,7 +14,7 @@
     "blocks": [
       {
         "type": "press-links",
-        "name": "Press Links",
+        "name": "Press Link",
         "settings": [
           {
             "id": "image",
