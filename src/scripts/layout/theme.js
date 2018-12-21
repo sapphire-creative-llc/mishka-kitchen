@@ -5,6 +5,8 @@ import "lazysizes/plugins/bgset/ls.bgset";
 import "lazysizes";
 import "lazysizes/plugins/respimg/ls.respimg";
 
+import jsonp from "jsonp";
+
 import "../../styles/theme.scss";
 import "../../styles/theme.scss.liquid";
 import "../../styles/fonts.scss.liquid";
@@ -495,6 +497,40 @@ import "../../styles/fonts.scss.liquid";
       }
     });
   };
+
+  $("form").on("submit", function(e) {
+    e.preventDefault();
+    const form = $(this).serialize();
+    $("svg.loading").show();
+    $(this)
+      .find('input[type="submit"]')
+      .hide();
+
+    jsonp(
+      `//chocamo.us9.list-manage.com/subscribe/post-json?u=a20dfd3a811db0d8ade7bf88f&id=2f282c2014&${form}`,
+      { param: "c" },
+      (err, data) => {
+        if (data.result === "success") {
+          $(this)
+            .find('input[type="email"]')
+            .val("");
+          $(this)
+            .find(".success")
+            .text(data.msg)
+            .removeClass("hide");
+          $("svg.loading").hide();
+          $(this)
+            .find('input[type="submit"]')
+            .show();
+          setTimeout(() => {
+            $(this)
+              .find(".success")
+              .text("");
+          }, 3000);
+        }
+      }
+    );
+  });
 
   const announcement = $(".announcement-wrapper").detach();
   $(".site").prepend(announcement);
