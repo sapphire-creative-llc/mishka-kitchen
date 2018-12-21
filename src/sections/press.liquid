@@ -1,0 +1,36 @@
+<div class="grid pt3 pb8">
+  <div>
+    <h5>{{ page.title }}</h5>
+  </div>
+  {% for block in section.blocks %}
+
+      {% case block.type %}
+        {% when 'press-links' %}
+        {% include 'press-link' %}
+      {% endcase %}
+    
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "blocks": [
+      {
+        "type": "press-links",
+        "name": "Press Links",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+          {
+            "id": "link_url",
+            "type": "url",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
