@@ -498,7 +498,7 @@ import "../../styles/fonts.scss.liquid";
     });
   };
 
-  $("form").on("submit", function(e) {
+  $(".mc-form-footer, .mc-form-popup").on("submit", function(e) {
     e.preventDefault();
     const form = $(this).serialize();
     $("svg.loading").show();
@@ -537,6 +537,22 @@ import "../../styles/fonts.scss.liquid";
 
   $(".secondary-trigger").on("click", () => {
     $(".secondary-nav").toggleClass("hide");
+  });
+
+  $(".search-trigger").on("click", e => {
+    e.preventDefault();
+    e.stopPropagation();
+    $(".search-box").toggleClass("showing");
+  });
+
+  $(".search-box").on("click", e => {
+    e.stopPropagation();
+  });
+
+  $(document).on("click", e => {
+    if ($(".search-box").hasClass("showing")) {
+      $(".search-box").removeClass("showing");
+    }
   });
 
   $(window).on("scroll", () => {

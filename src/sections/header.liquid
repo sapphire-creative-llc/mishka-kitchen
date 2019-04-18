@@ -7,7 +7,7 @@
 
 {% if section.settings.announcement_bar_enabled %}
   {% if section.settings.announcement_bar_link != blank %}
-    <a class="announcement-wrapper black no-underline" href="{{ settings.announcement_banner_link }}">
+    <a class="announcement-wrapper black no-underline" href="{{ section.settings.announcement_bar_link }}">
       <div class="js-announcement announcement height-2 text-center">
         <div class="pad-announcement flex items-center justify-center h100p announcement-bg-color announcement-color">
           <p class="m0 h5 flex-1">{{ section.settings.announcement_bar_text }}</p>
@@ -26,12 +26,33 @@
 <header class="js-header site-nav sticky t0 mx1 l1 r1 show-lg z9 h5 text-uppercase header-bg-color rounded-bottom">
   <div class="flex items-center h100p px1">
     <nav class="flex items-center w100p">
-      <div class="flex-1 basis-0">
+      <div class="flex items-center flex-1 basis-0">
         {% for link_1 in linklists[section.settings.header_linklist_1].links %}
           <a class="header-link-color no-underline p1 hover-opacity-5" href="{{ link_1.url }}">
             {{ link_1.title }}
           </a>
         {% endfor %}
+        <div class="site-search inline relative">
+          <a class="search-trigger header-link-color no-underline p1 hover-opacity-5 flex items-center" href="#">
+            {% assign search_width = 18 %}
+            {% include 'icon-search' %}
+            <span class="search-text">Search</span>
+          </a>
+          <div class="search-box absolute t0 z2">
+            <div class="bg-white p1 border border-smoke">
+              <form class="search" action="/search" autocomplete="off">
+                <input type="hidden" name="type" value="product" />
+                <label class="hide">Search:</label>
+                <div class="relative">
+                  <input type="text" placeholder="e.g. cookies" name="q" required  value="{{ search.terms | escape }}" class="pt-sans required email w100p border-box" />
+                  <div class="absolute flex items-center t0 r0 b0 r0">
+                    <input type="submit" value="→" class="h3 dark-pink">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
       <h1 class="m0 h0">
         <a class="no-underline" href="/">
@@ -63,23 +84,27 @@
 
 <header class="js-header z9 t0 header-bg-color hide-lg site-nav sticky h5 text-uppercase">
   <div class="flex items-center h100p px1">
-    <div class="flex-1 w20p h0">
-      <svg class="js-mobile-nav-open inline-block pointer dark-teal" xmlns="http://www.w3.org/2000/svg" width="21" viewBox="0 0 33 23">
+    <div class="flex-1 w30p flex items-center">
+      <svg class="js-mobile-nav-open inline-block pointer dark-teal h0" xmlns="http://www.w3.org/2000/svg" width="21" viewBox="0 0 33 23">
         <g fill="currentColor">
           <rect y="10.2" width="33" height="2.6"/>
           <rect width="33" height="2.6"/>
           <rect y="20.4" width="33" height="2.6"/>
         </g>
       </svg>
+      <a class="mobile-search white no-underline hover-opacity-5 flex items-center h6" href="/search">
+        {% assign search_width = 18 %}
+        {% include 'icon-search' %}
+      </a>
     </div>
-    <div class="flex-1 w60p text-center">
+    <div class="flex-1 w40p text-center">
       <h1 class="m0 h0">
         <a class="no-underline" href="/">
           <img width="{{ section.settings.logo_width_mobile }}" src="{{ section.settings.logo | img_url: '300x' }}" />
         </a>
       </h1>
     </div>
-    <div class="flex-1 w20p flex justify-end">
+    <div class="flex-1 w30p flex justify-end">
       <a class="js-cart-trigger no-underline dark-teal" href="#">
         <div class="flex items-center">
           {% assign cart_icon_width = 18 %}
