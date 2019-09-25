@@ -1,4 +1,4 @@
-{% paginate blog.articles by 5 %}
+{% paginate blog.articles by 14 %}
   {%- assign blog_title = blog.title -%}
   <div class="grid">
     <div class="blog-wrapper mx-auto">
@@ -14,53 +14,51 @@
         <h2 class="text-normal pt-sans-bold red m0">{{ blog_title }}</h2>
       </div>
 
-      <div class="overflow-hidden">
-        <div class="right blog-right border-box">
+      <div class="flex-md pt3">
+        <div class="blog-left flex flex-wrap">
           {% for article in blog.articles %}
-            <h2 class="mb1">
-              <a class="red no-underline" href="{{ article.url }}">
-                {{ article.title }}
+            <div class="w50p px2 border-box mb3">
+              <a href="{{ article.url }}">
+                <img src="{{ article.image.src | img_url: '700x' }}">
               </a>
-            </h2>
-            <div class="flex-md border-bottom border-smoke pb2 mb2 clip">
-              <a class="w20p mr1" href="{{ article.url }}">
-                <img src="{{ article.image.src | img_url: '300x' }}">
-              </a>
-              <div class="w80p">
-                {% capture date %}
-                  {{ article.published_at | time_tag: format: 'month_day_year' }}
-                {% endcapture %}
-                <p class="medium-gray h5 m0">
-                  {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
+              <h2 class="mb1">
+                <a class="red no-underline" href="{{ article.url }}">
+                  {{ article.title }}
+                </a>
+              </h2>
+              {% capture date %}
+                {{ article.published_at | time_tag: format: 'month_day_year' }}
+              {% endcapture %}
+              <p class="medium-gray h5 m0">
+                {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
+              </p>
+              {% if article.excerpt.size > 0 %}
+                {{ article.excerpt }}
+              {% else %}
+                <p class="dark-gray">
+                  {{ article.content | strip_html | truncatewords: 30 }}
+                  <a href="{{ article.url }}" class="dark-teal no-underline">
+                    {{ 'blogs.article.read_more' | t }}
+                  </a>
                 </p>
-                {% if article.excerpt.size > 0 %}
-                  {{ article.excerpt }}
-                {% else %}
-                  <p class="dark-gray">
-                    {{ article.content | strip_html | truncatewords: 30 }}
-                    <a href="{{ article.url }}" class="dark-teal no-underline">
-                      {{ 'blogs.article.read_more' | t }}
-                    </a>
-                  </p>
-                {% endif %}
-              </div>
+              {% endif %}
             </div>
           {% endfor %}
         </div>
-        {% if blog.all_tags.size > 0 %}
-        <div class="left blog-left">
-          <h4>{{ 'blogs.general.categories' | t }}</h4>
-          <ul class="blog-tags-list h4">
-            {% for tag in blog.all_tags %}
-              {% if current_tags contains tag %}
-                <li>{{ tag }}</li>
-              {% else %}
-                <li>{{ tag | link_to_tag: tag }}</li>
-              {% endif %}
-            {% endfor %}
-          </ul>
+        <div class="blog-right">
+          {% if blog.all_tags.size > 0 %}
+            <h4 class="mt0">{{ 'blogs.general.categories' | t }}</h4>
+            <ul class="blog-tags-list h4">
+              {% for tag in blog.all_tags %}
+                {% if current_tags contains tag %}
+                  <li>{{ tag }}</li>
+                {% else %}
+                  <li>{{ tag | link_to_tag: tag }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
       <div class="pagination text-center py4">
         {% if paginate.pages > 1 %}

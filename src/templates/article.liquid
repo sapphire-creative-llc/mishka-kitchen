@@ -1,6 +1,15 @@
 <div class="grid">
-  <div class="blog-wrapper mx-auto overflow-hidden">
-    <article class="right blog-right border-box" role="article">
+  <div class="blog-wrapper mx-auto flex-md">
+    <div class="blog-right">
+      <img src="{{ article.image.src | img_url: '600x' }}" />
+      <h4>Tags</h4>
+      <ul class="blog-tags-list h4">
+        {% for tag in article.tags %}
+          <li><a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag | link_to_tag: tag }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <article class="blog-left border-box pl4" role="article">
       <header role="banner">
         <h1 class="mt0">{{ article.title }}</h1>
         {% capture date %}
@@ -19,15 +28,6 @@
       {% endif %}
 
     </article>
-    <div class="left blog-left">
-      <div class="rounded image bg-center bg-cover fade-image border border-smoke h100p w100p pt100p bg-light-gray " data-img="{{ article.image.src | img_url: '600x' }}"></div>
-      <h4>Tags</h4>
-      <ul class="blog-tags-list h4">
-        {% for tag in article.tags %}
-          <li><a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag | link_to_tag: tag }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
   </div>
 </div>
 
