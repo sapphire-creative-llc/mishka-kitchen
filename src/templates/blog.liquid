@@ -17,7 +17,7 @@
       <div class="flex-md pt3">
         <div class="blog-left flex flex-wrap">
           {% for article in blog.articles %}
-            <div class="blog-article border-box mb3">
+            <div class="blog-item border-box mb3">
               <a href="{{ article.url }}">
                 <img src="{{ article.image.src | img_url: '700x' }}">
               </a>
