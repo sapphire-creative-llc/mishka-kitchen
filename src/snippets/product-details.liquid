@@ -2,8 +2,8 @@
 
 <h2 class="text-normal mt0 mb1">{{ product.title }}</h2>
 {% if available %}
-  <span class="mt0 h4 mb1 dark-teal">
-    {{ product.price | money_without_trailing_zeros }}
+  <span class="mt0 h3 mb1 dark-teal">
+    <span class="js-price">{{ product.price | money_without_trailing_zeros }}</span>
     {% if product.compare_at_price_max > 0 %}
       <strike class="strike dark-teal">
         <span class="mild-gray">{{ product.compare_at_price_max | money_without_trailing_zeros }}</span>
@@ -15,7 +15,7 @@
 {% endif %}
 <p class="medium-gray">{{ product.description }}</p>
 <span class="pb1 block"></span>
-<form class="js-cart-form" action="/cart/add" method="post" enctype="multipart/form-data">
+<form action="/cart/add" class="js-cart-form" enctype="multipart/form-data" method="post">
   <div class="relative black">
     {% if available %}
       <select name="id" type="hidden">
@@ -26,7 +26,8 @@
             </option>
           {% else %}
             <option disabled="disabled">
-              {{ variant.title }} - sold out!
+              {{ variant.title }}
+              - sold out!
             </option>
           {% endif %}
         {% endfor %}
@@ -37,8 +38,8 @@
             <div class="flex">
               {% for value in product_option.values %}
                 <div class="product-input relative">
-                  <input data-option-value="{{ value }}" data-position="{{ product_option.position }}" class="absolute t0 l0 r0 b0 w100p h100p pointer m0 o0p z1" type="radio" name="{{ product_option.name }}" value="{{ value }}" {% if product_option.selected_value == value %}checked{% endif %} />
-                  <button type="button" class="product-option medium-gray product-{{ product_option.name }} border border-mild-gray rounded apercu-regular h4 m0 flex items-center justify-center bg-white {% if product_option.selected_value == value %}black border-black{% endif %}">
+                  <input data-option-value="{{ value }}" data-position="{{ product_option.position }}" class="absolute t0 l0 r0 b0 w100p h100p pointer m0 o0p z1" type="radio" name="{{ product_option.name }}" value="{{ value }}" {% if product_option.selected_value == value %} checked {% endif %}/>
+                  <button class="product-option medium-gray product-{{ product_option.name }} border border-mild-gray rounded apercu-regular h4 m0 flex items-center justify-center bg-white {% if product_option.selected_value == value %}black border-black{% endif %}" type="button">
                     <span class="relative">{{ value }}</span>
                   </button>
                 </div>
@@ -47,13 +48,7 @@
           </label>
         {% endif %}
       {% endfor %}
-      <input
-        type="submit"
-        name="add"
-        id="add"
-        value="Add to Cookie Jar"
-        class="button mt1 h5 text-uppercase bg-teal rounded white no-border"
-      />
+      <input class="button mt1 h5 text-uppercase bg-teal rounded white no-border" id="add" name="add" type="submit" value="Add to Cookie Jar"/>
     {% endif %}
   </div>
 </form>

@@ -323,12 +323,13 @@ import "../../styles/fonts.scss.liquid";
           $('select[name="id"]')
             .val(selectedVariant[0].id)
             .change();
+          $(".js-price").text(priceToCurrency(selectedVariant[0].price));
         }
 
         disableUnavailableVariants(variants);
       });
     });
-    console.log("here", $this);
+
     $this
       .closest("label")
       .find("button")
@@ -353,27 +354,31 @@ import "../../styles/fonts.scss.liquid";
       .find("span")
       .removeClass("strike");
 
-    variants.filter(v => v.option1 === selectedOption1).map(v => {
-      if (!v.available) {
-        $(`input[data-option-value='${v.option2}']`)
-          .prop("disabled", true)
-          .css("cursor", "default")
-          .siblings("button")
-          .find("span")
-          .addClass("strike");
-      }
-    });
+    variants
+      .filter(v => v.option1 === selectedOption1)
+      .map(v => {
+        if (!v.available) {
+          $(`input[data-option-value='${v.option2}']`)
+            .prop("disabled", true)
+            .css("cursor", "default")
+            .siblings("button")
+            .find("span")
+            .addClass("strike");
+        }
+      });
 
-    variants.filter(v => v.option2 === selectedOption2).map(v => {
-      if (!v.available) {
-        $(`input[data-option-value='${v.option1}']`)
-          .prop("disabled", true)
-          .css("cursor", "default")
-          .siblings("button")
-          .find("span")
-          .addClass("strike");
-      }
-    });
+    variants
+      .filter(v => v.option2 === selectedOption2)
+      .map(v => {
+        if (!v.available) {
+          $(`input[data-option-value='${v.option1}']`)
+            .prop("disabled", true)
+            .css("cursor", "default")
+            .siblings("button")
+            .find("span")
+            .addClass("strike");
+        }
+      });
   };
 
   getProductData().then(({ product }) => {
