@@ -294,7 +294,13 @@ import "../../styles/fonts.scss.liquid";
         })
         .fail(({ responseText }) => {
           const { description } = JSON.parse(responseText);
-          setTimeout(() => showError(description), 250);
+          setTimeout(
+            () =>
+              showError(
+                "Sorry, this treat is currently OUT OF STOCK. Be sure to try a different size or flavor!"
+              ),
+            250
+          );
         });
     }
   });
@@ -343,10 +349,6 @@ import "../../styles/fonts.scss.liquid";
       .find("input[data-position='1']:checked")
       .val();
 
-    const selectedOption2 = $("form")
-      .find("input[data-position='2']:checked")
-      .val();
-
     $(`input[data-option-value]`)
       .prop("disabled", false)
       .css("cursor", "pointer")
@@ -355,29 +357,14 @@ import "../../styles/fonts.scss.liquid";
       .removeClass("strike");
 
     variants
-      .filter(v => v.option1 === selectedOption1)
+      .filter(v => !v.available)
       .map(v => {
-        if (!v.available) {
-          $(`input[data-option-value='${v.option2}']`)
-            .prop("disabled", true)
-            .css("cursor", "default")
-            .siblings("button")
-            .find("span")
-            .addClass("strike");
-        }
-      });
-
-    variants
-      .filter(v => v.option2 === selectedOption2)
-      .map(v => {
-        if (!v.available) {
-          $(`input[data-option-value='${v.option1}']`)
-            .prop("disabled", true)
-            .css("cursor", "default")
-            .siblings("button")
-            .find("span")
-            .addClass("strike");
-        }
+        $(`input[data-option-value='${v.option1}']`)
+          .prop("disabled", true)
+          .css("cursor", "default")
+          .siblings("button")
+          .find("span")
+          .addClass("strike");
       });
   };
 
